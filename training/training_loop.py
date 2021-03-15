@@ -103,7 +103,7 @@ def training_loop(
     kimg_per_tick           = 4,        # Progress snapshot interval.
     image_snapshot_ticks    = 50,       # How often to save image snapshots? None = only save 'reals.png' and 'fakes-init.png'.
     network_snapshot_ticks  = 50,       # How often to save network snapshots? None = only save 'networks-final.pkl'.
-    resume_pkl              = 'https://pepegan.s3.amazonaws.com/network-snapshot-000921.pkl',     # Network pickle to resume training from.
+    resume_pkl              = 'https://pepegan.s3.amazonaws.com/richpepe-000819.pkl',     # Network pickle to resume training from.
     abort_fn                = None,     # Callback function for determining whether to abort training.
     progress_fn             = None,     # Callback function for updating training progress.
 ):
