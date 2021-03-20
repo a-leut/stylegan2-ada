@@ -581,7 +581,7 @@ def create_lsun(tfrecord_dir, lmdb_dir, resolution=256, max_images=None):
                     tfr.add_image(img)
                 except:
                     print('couldn''t load image')
-                    #print(sys.exc_info()[1])
+                    print(sys.exc_info()[1])
                 if tfr.cur_images == max_images:
                     break
 
