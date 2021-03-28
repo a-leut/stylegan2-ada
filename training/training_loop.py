@@ -1,4 +1,4 @@
-﻿# Copyright (c) 2020, NVIDIA CORPORATION.  All rights reserved.
+# Copyright (c) 2020, NVIDIA CORPORATION.  All rights reserved.
 #
 # NVIDIA CORPORATION and its licensors retain all intellectual property
 # and proprietary rights in and to this software, related documentation
@@ -60,7 +60,9 @@ def setup_snapshot_image_grid(training_set):
             if x < gw and y < gh:
                 reals[x + y * gw] = real[0]
                 labels[x + y * gw] = label[0]
-    return (gw, gh), reals, labels
+
+    #return (gw, gh), reals, labels
+    return (10, 10), reals, labels
 
 #----------------------------------------------------------------------------
 
@@ -103,8 +105,7 @@ def training_loop(
     kimg_per_tick           = 4,        # Progress snapshot interval.
     image_snapshot_ticks    = 50,       # How often to save image snapshots? None = only save 'reals.png' and 'fakes-init.png'.
     network_snapshot_ticks  = 50,       # How often to save network snapshots? None = only save 'networks-final.pkl'.
-    #resume_pkl              = 'https://pepegan.s3.amazonaws.com/network-snapshot-000921.pkl',     # Network pickle to resume training from.
-    resume_pkl              = None,     # Network pickle to resume training from.
+    resume_pkl              = 'https://pepegan.s3.amazonaws.com/100m/network-snapshot-001024.pkl',     # Network pickle to resume training from.
     abort_fn                = None,     # Callback function for determining whether to abort training.
     progress_fn             = None,     # Callback function for updating training progress.
 ):
