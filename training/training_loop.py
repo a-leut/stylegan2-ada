@@ -60,9 +60,7 @@ def setup_snapshot_image_grid(training_set):
             if x < gw and y < gh:
                 reals[x + y * gw] = real[0]
                 labels[x + y * gw] = label[0]
-
-    #return (gw, gh), reals, labels
-    return (10, 10), reals, labels
+    return (gw, gh), reals, labels
 
 #----------------------------------------------------------------------------
 
@@ -105,7 +103,8 @@ def training_loop(
     kimg_per_tick           = 4,        # Progress snapshot interval.
     image_snapshot_ticks    = 50,       # How often to save image snapshots? None = only save 'reals.png' and 'fakes-init.png'.
     network_snapshot_ticks  = 50,       # How often to save network snapshots? None = only save 'networks-final.pkl'.
-    resume_pkl              = 'https://pepegan.s3.amazonaws.com/100m/network-snapshot-001024.pkl',     # Network pickle to resume training from.
+    #resume_pkl              = 'https://pepegan.s3.amazonaws.com/network-snapshot-000921.pkl',     # Network pickle to resume training from.
+    resume_pkl              = None,     # Network pickle to resume training from.
     abort_fn                = None,     # Callback function for determining whether to abort training.
     progress_fn             = None,     # Callback function for updating training progress.
 ):
@@ -138,9 +137,7 @@ def training_loop(
     save_image_grid(grid_reals, os.path.join(run_dir, 'reals.png'), drange=[0,255], grid_size=grid_size)
     grid_latents = np.random.randn(np.prod(grid_size), *G.input_shape[1:])
     grid_fakes = Gs.run(grid_latents, grid_labels, is_validation=True, minibatch_size=minibatch_gpu)
-    for i in range(20):
-        print(f'💕 Exporting sample {i}')
-        save_image_grid(grid_fakes, os.path.join(run_dir, f'fakes_init_{i}.png'), drange=[-1,1], grid_size=grid_size)
+    save_image_grid(grid_fakes, os.path.join(run_dir, 'fakes_init.png'), drange=[-1,1], grid_size=grid_size)
 
     print(f'Replicating networks across {num_gpus} GPUs...')
     G_gpus = [G]
